@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/MeteringSimulator/.vs/MeteringSimulator
+/MeteringSimulator/MeteringSimulator/.vs
+/NetworkService/NetworkService/.vs/NetworkService

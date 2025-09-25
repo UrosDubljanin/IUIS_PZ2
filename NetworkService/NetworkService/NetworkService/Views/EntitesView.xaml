@@ -1,0 +1,206 @@
+﻿<UserControl x:Class="NetworkService.Views.EntitesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:model="clr-namespace:NetworkService.Model"
+             xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+             xmlns:helpers="clr-namespace:NetworkService.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="800"
+             d:DesignWidth="450">
+    <UserControl.DataContext>
+        <viewModel:EntitiesViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"/>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="{Binding VisinaTastature}" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Text="EntitiesView"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontSize="33"
+            Foreground="Black"
+            />
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Orientation="Horizontal"
+            Height="40"
+            VerticalAlignment="Bottom">
+            <ComboBox Margin="10 0 10 0"
+                      Width="130"
+                      IsEditable="True"
+                      IsReadOnly="True"
+                      Text="Tip"
+                      BorderThickness="2"
+                      BorderBrush="{Binding BorderTip1}"
+                      FontFamily="Times New Roman"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Center"
+                      FontSize="16"
+                      IsEnabled="{Binding CanClickButton}"
+                      ItemsSource="{Binding TipoviMeraca}"
+                      SelectedItem="{Binding OdabranaOpcijaPretrazi, Mode=TwoWay}"/>
+
+
+            <RadioButton Content=">" FontSize="16" Margin="5" VerticalAlignment="Center"  IsEnabled="{Binding CanClickButton}" IsChecked="{Binding IsVeceChecked}"/>
+            <RadioButton Content="&lt;" FontSize="16" Margin="5" VerticalAlignment="Center"  IsEnabled="{Binding CanClickButton}" IsChecked="{Binding IsManjeChecked}"/>
+            <RadioButton Content="=" FontSize="16" Margin="5" VerticalAlignment="Center"  IsEnabled="{Binding CanClickButton}" IsChecked="{Binding IsJednakoChecked}"/>
+            <TextBox Width="45"
+                     FontSize="16"
+                     VerticalAlignment="Center"
+                     Height="30"
+                     Margin="5 0 10 0"
+                     BorderThickness="2"
+                     BorderBrush="{Binding BorderBroj}"
+                     Text="{Binding TextBoxSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     IsReadOnly="{Binding CanWriteBroj}"
+                     helpers:FocusBehavior.GotFocusCommand="{Binding FocusBrojBox}"
+                     >
+            </TextBox>
+
+
+
+            <Button Width="50"
+                    Height="40"
+                    Margin="0 0 10 0"
+                    Content="Pretraga"
+                    IsEnabled="{Binding CanClickButton}"
+                    Command="{Binding PretraziCommand}"/>
+            <Button Width="40"
+                    Height="40"
+                    Margin="0 0 10 0"
+                    Content="Osvezi"
+                    IsEnabled="{Binding CanClickButton}"
+                    Command="{Binding RestartCommand}"/>
+
+        </StackPanel>
+        <Grid  Grid.Row="2" 
+               Grid.RowSpan="2"
+               Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Margin="5,15,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="False"
+              ItemsSource="{Binding Entities, Mode=TwoWay}"
+              SelectedItem="{Binding SelektovaniEntitet, Mode=TwoWay}"
+              CanUserAddRows="False"
+              IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="*" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Naziv" Width="3*" Binding="{Binding Naziv}"/>
+                    <DataGridTextColumn Header="Tip" Width="3*" Binding="{Binding Tip}"/>
+                    <DataGridTextColumn Header="Merenje" Width="3*" Binding="{Binding Merenje}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+                <TextBlock
+                    Text="Naziv:"
+                    FontSize="20"
+                    VerticalAlignment="Center"
+                    FontFamily="Times New Roman"/>
+
+
+                <TextBox 
+                         Margin="5"
+                         Width="150"
+                         FontSize="20"
+                         VerticalAlignment="Center"
+                        BorderThickness="2"
+                        BorderBrush="{Binding BorderText}"
+                         FontFamily="Times New Roman"
+                         IsReadOnly="{Binding CanWriteText}"
+                         Text="{Binding TextBoxContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         helpers:FocusBehavior.GotFocusCommand="{Binding FocusTextBox}"
+                         />
+
+                <ComboBox Grid.Row="1"
+                          Grid.Column="3"
+                          Margin="10"
+                          Width="150"
+                          IsEditable="True"
+                          IsReadOnly="True"
+                          Text="Tip"
+                          BorderThickness="2"
+                          BorderBrush="{Binding BorderTip2}"
+                          FontFamily="Times New Roman"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          FontSize="16"
+                          IsEnabled="{Binding CanClickButton}"
+                          ItemsSource="{Binding TipoviMeraca}"
+                          SelectedItem="{Binding OdabranaOpcijaDodaj, Mode=TwoWay}"
+                          >
+                </ComboBox>
+            </StackPanel>
+
+
+
+        </Grid>
+        <Grid Grid.Row="4"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button
+                Content="Dodaj merac"
+                FontSize="16"
+                Margin="0 5 10 0"
+                IsEnabled="{Binding CanClickButton}"
+                Command="{Binding DodajCommand}"/>
+        </Grid>
+        <Grid Grid.Row="4"
+              Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button
+                Content="Izbrisi merac"
+                FontSize="16"
+                Margin="10 5 10 0"
+                IsEnabled="{Binding CanClickButton}"
+                Command="{Binding IzbrisiCommand}"/>
+        </Grid>
+        <Grid Grid.Row="5"
+              Grid.Column="0"
+              Grid.ColumnSpan="3"
+              >
+            <local:TastaturaView Background="LightGray"
+                                DataContext="{Binding TastaturaVM}" 
+                                 Visibility="{Binding IsTastaturaVisible}"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

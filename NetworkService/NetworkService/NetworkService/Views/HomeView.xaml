@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="NetworkService.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetworkService.Views"
+             xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="200">
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button
+            Grid.Row="0"
+            Width="180"
+            Height="90"
+            Content="Home"
+            FontSize="35"
+            FontFamily="Times New Roman"
+            Command="{Binding ShowPocetniCommand}"
+            />
+        <Button
+            Grid.Row="1"
+            Width="180"
+            Height="90"
+            Content="Entities"
+            FontSize="35"
+            FontFamily="Times New Roman"
+            Command="{Binding ShowEntitiesCommand}"
+            />
+        <Button
+            Grid.Row="2"
+            Width="180"
+            Height="90"
+            Content="Display"
+            FontSize="35"
+            FontFamily="Times New Roman"
+            Command="{Binding ShowDisplayCommand}"
+            />
+        <Button
+            Grid.Row="3"
+            Width="180"
+            Height="90"
+            Content="Graph"
+            FontSize="35"
+            FontFamily="Times New Roman"
+            Command="{Binding ShowGraphCommand}"
+            />
+        <Button
+            Grid.Row="4"
+            Width="180"
+            Height="90"
+            Content="Exit"
+            FontSize="35"
+            FontFamily="Times New Roman"
+            Background="Red"
+            Foreground="White"
+            Command="{Binding ExitCommand}"
+            />
+    </Grid>
+</UserControl>

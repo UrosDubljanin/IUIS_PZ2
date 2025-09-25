@@ -1,0 +1,74 @@
+﻿<Window x:Class="NetworkService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetworkService"
+        xmlns:view="clr-namespace:NetworkService.Views"
+        xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Title="MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Height="800"
+        Width="450"
+        Background="LightBlue">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <view:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EntitiesViewModel}">
+            <view:EntitesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:DisplayViewModel}">
+            <view:DisplayView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:GraphViewModel}">
+            <view:GraphView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:PocetniViewModel}">
+            <view:PocetniView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="{Binding SirinaHome}" />
+        </Grid.ColumnDefinitions>
+
+        <Button Content="Undo" 
+                Width="40"  
+                Height="40" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"
+                Margin="5"
+                IsEnabled="{Binding UndoEnable}"
+                Command="{Binding UndoCommand}"
+                Grid.Column="0"/>
+
+        <Button Content="☰" 
+                Width="40"  
+                Height="40" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top"
+                Margin="5"
+                Command="{Binding ToggleMenuCommand}" 
+                Grid.Column="0"/>
+
+        <view:HomeView  Background="LightGray"
+                        Grid.Column="1" 
+                        DataContext="{Binding HomeVM}" 
+                        Visibility="{Binding IsHomeVisible}"
+                        />
+
+        <ContentControl Grid.Column="0"
+                        Content="{Binding CurrentView}" 
+                        Margin="0,0,0,0"
+                        />
+        
+        
+    </Grid>
+</Window>
